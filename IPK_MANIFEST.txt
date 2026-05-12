@@ -1,0 +1,65 @@
+# OpenWrt 24.10.1 IPK Package Manifest
+# Pineapple Pager (mipsel_24kc)
+# Generated: 2026-05-12
+
+## Downloaded Packages (10 total)
+
+### Core Networking Tools
+curl_8.12.1-r1_mipsel_24kc.ipk
+wget-ssl_1.24.5-r1_mipsel_24kc.ipk
+ncat_7.95-r1_mipsel_24kc.ipk
+socat_1.8.0.3-r2_mipsel_24kc.ipk
+
+### System Utilities
+macchanger_1.7.0-r3_mipsel_24kc.ipk
+tmux_3.5a-r1_mipsel_24kc.ipk
+usbutils_017-r1_mipsel_24kc.ipk
+
+### Data Processing
+jq_1.8.1-r1_mipsel_24kc.ipk
+sqlite3-cli_3530000-r1_mipsel_24kc.ipk
+
+### Security Tools
+pixiewps_1.4.2-r2_mipsel_24kc.ipk
+
+## Quick Install on Pager
+
+### SSH to device
+ssh root@pineapple
+
+### Install all packages at once
+opkg update && opkg install -d mmc /mmc/curl_8.12.1-r1_mipsel_24kc.ipk /mmc/wget-ssl_1.24.5-r1_mipsel_24kc.ipk /mmc/ncat_7.95-r1_mipsel_24kc.ipk /mmc/socat_1.8.0.3-r2_mipsel_24kc.ipk /mmc/macchanger_1.7.0-r3_mipsel_24kc.ipk /mmc/tmux_3.5a-r1_mipsel_24kc.ipk /mmc/usbutils_017-r1_mipsel_24kc.ipk /mmc/jq_1.8.1-r1_mipsel_24kc.ipk /mmc/sqlite3-cli_3530000-r1_mipsel_24kc.ipk /mmc/pixiewps_1.4.2-r2_mipsel_24kc.ipk
+
+### Or install from /mmc directory
+cd /mmc && opkg install -d mmc *.ipk
+
+## Verify Installation
+
+### Check installed packages
+opkg list-installed | grep -E "(curl|wget|macchanger|jq|sqlite|tmux|socat|ncat|pixiewps)"
+
+### Check command availability
+for cmd in curl wget macchanger jq sqlite3 tmux socat ncat pixiewps lsusb; do
+  echo -n "$cmd: "
+  which $cmd >/dev/null 2>&1 && echo "✓" || echo "✗"
+done
+
+## Size Information
+Total Size: ~2.8 MB
+Unpacked: ~8-10 MB
+RAM Usage (all): ~20-25 MB
+Available on Pager: 80 MB RAM, sufficient /mmc storage
+
+## Notes
+- All packages are compatible with OpenWrt 24.10.1
+- Architecture: mipsel_24kc (ramips/mt76x8)
+- Use -d mmc flag to install on microSD instead of RAM
+- opkg will automatically resolve dependencies
+- SSL/TLS libraries already present in Pager firmware
+
+## Contact & Support
+For issues:
+1. Check DEPLOYMENT_REPORT.md for detailed setup
+2. Verify package integrity: file *.ipk
+3. Check logs: cat /var/log/opkg.log
+4. See docs/INSTALLATION.md for troubleshooting
